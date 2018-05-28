@@ -385,7 +385,7 @@ let index_64 : [Int8]  = [
 
 // MARK: -
 
-class JKBCrypt: NSObject {
+public class JKBCrypt: NSObject {
     
     // MARK: Property List
     
@@ -403,7 +403,7 @@ class JKBCrypt: NSObject {
      
      :returns: String    The generated salt
      */
-    class func generateSaltWithNumberOfRounds(rounds: UInt) -> String {
+    class public func generateSaltWithNumberOfRounds(rounds: UInt) -> String {
         let randomData : NSData = JKBCryptRandom.generateRandomSignedDataOfLength(length: BCRYPT_SALT_LEN)
         
         var salt : String
@@ -418,7 +418,7 @@ class JKBCrypt: NSObject {
      
      :returns: String    The generated salt.
      */
-    class func generateSalt() -> String {
+    class public func generateSalt() -> String {
         return JKBCrypt.generateSaltWithNumberOfRounds(rounds: 10)
     }
     
@@ -434,7 +434,7 @@ class JKBCrypt: NSObject {
      
      :returns: String?  The hashed password.
      */
-    class func hashPassword(password: String, withSalt salt: String) -> String? {
+    class public func hashPassword(password: String, withSalt salt: String) -> String? {
         var bCrypt         : JKBCrypt
         var realSalt       : String
         var minor          : Character = "\000"[0]
@@ -520,7 +520,7 @@ class JKBCrypt: NSObject {
      :returns: Bool?     TRUE if the password hash matches the given hash; FALSE if the two do not
      match; nil if hash is improperly formatted.
      */
-    class func verifyPassword(password: String, matchesHash hash: String) -> Bool? {
+    class public func verifyPassword(password: String, matchesHash hash: String) -> Bool? {
         if let hashedPassword = JKBCrypt.hashPassword(password: password, withSalt: hash) {
             return hashedPassword == hash
         }
