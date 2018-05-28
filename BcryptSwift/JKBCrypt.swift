@@ -758,13 +758,13 @@ class JKBCrypt: NSObject {
         
         var j = 0
         for i in 0..<clen {
-            result[j] = Int8(truncatingBitPattern: (cdata[i] >> 24) & 0xff)
+            result[j] = Int8(truncatingIfNeeded: (cdata[i] >> 24) & 0xff)
             j += 1
-            result[j] = Int8(truncatingBitPattern: (cdata[i] >> 16) & 0xff)
+            result[j] = Int8(truncatingIfNeeded: (cdata[i] >> 16) & 0xff)
             j += 1
-            result[j] = Int8(truncatingBitPattern: (cdata[i] >> 8) & 0xff)
+            result[j] = Int8(truncatingIfNeeded: (cdata[i] >> 8) & 0xff)
             j += 1
-            result[j] = Int8(truncatingBitPattern: cdata[i] & 0xff)
+            result[j] = Int8(truncatingIfNeeded: cdata[i] & 0xff)
             j += 1
         }
         
