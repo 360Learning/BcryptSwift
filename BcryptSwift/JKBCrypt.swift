@@ -64,8 +64,7 @@ extension String {
         let start = index(startIndex, offsetBy: r.lowerBound)
         let end = index(startIndex, offsetBy: r.upperBound)
         let range = start..<end
-        return substring(with: range)
-        //return substringWithRange(Range(start: advance(startIndex, r.startIndex), end: advance(startIndex, r.endIndex)))
+        return String(self[range])
     }
 }
 
@@ -390,15 +389,8 @@ class JKBCrypt: NSObject {
     
     // MARK: Property List
     
-    private var p : UnsafeMutablePointer<Int32> // [Int32]
-    private var s : UnsafeMutablePointer<Int32> // [Int32]
-    
-    // MARK: - Override Methods
-    
-    override init() {
-        self.p = UnsafeMutablePointer<Int32>.allocate(capacity: 0) // was nil before migration
-        self.s = UnsafeMutablePointer<Int32>.allocate(capacity: 0) // was nil before migration
-    }
+    private var p: UnsafeMutablePointer<Int32>!
+    private var s: UnsafeMutablePointer<Int32>!
     
     // MARK: - Public Class Methods
     
@@ -449,7 +441,7 @@ class JKBCrypt: NSObject {
         var off            : Int = 0
         
         // If the salt length is too short, it is invalid
-        if salt.characters.count < BCRYPT_SALT_LEN {
+        if salt.count < BCRYPT_SALT_LEN {
             return nil
         }
         
@@ -479,7 +471,7 @@ class JKBCrypt: NSObject {
         var startIndex = salt.index(salt.startIndex, offsetBy: off)
         var endIndex = salt.index(salt.startIndex, offsetBy: off + 2)
         var range : Range = startIndex..<endIndex
-        let extactedRounds = Int(salt.substring(with: range))
+        let extactedRounds = Int(salt[range])
         if extactedRounds == nil {
             // Invalid number of rounds
             return nil
@@ -489,7 +481,7 @@ class JKBCrypt: NSObject {
         startIndex = salt.index(salt.startIndex, offsetBy: off + 3)
         endIndex = salt.index(salt.startIndex, offsetBy: off + 25)
         range = startIndex..<endIndex
-        realSalt = salt.substring(with: range)
+        realSalt = String(salt[range])
         
         var passwordPreEncoding : String = password
         if minor >= "a" {
@@ -627,7 +619,7 @@ class JKBCrypt: NSObject {
      */
     class private func decode_base64(s: String, ofMaxLength maxolen: Int) -> NSData? {
         var off : Int = 0
-        let slen : Int = s.characters.count
+        let slen : Int = s.count
         var olen : Int = 0
         var result : [Int8] = [Int8](repeating: 0, count: maxolen)
         
@@ -854,7 +846,7 @@ class JKBCrypt: NSObject {
         let plen  : Int = 18
         let slen  : Int = 1024
         
-        let keyPointer : UnsafeMutablePointer<Int8> = unsafeBitCast(key.bytes, to: UnsafeMutablePointer<Int8>.self)
+        let keyPointer : UnsafeMutablePointer<Int8> = UnsafeMutablePointer<Int8>(mutating: key.bytes.assumingMemoryBound(to: Int8.self))
         let keyLength : Int = key.length
         
         for i in 0..<plen {
@@ -893,9 +885,9 @@ class JKBCrypt: NSObject {
         let plen  : Int = 18
         let slen  : Int = 1024
         
-        let keyPointer : UnsafeMutablePointer<Int8> = unsafeBitCast(key.bytes, to: UnsafeMutablePointer<Int8>.self)
+        let keyPointer : UnsafeMutablePointer<Int8> = UnsafeMutablePointer<Int8>(mutating: key.bytes.assumingMemoryBound(to: Int8.self))
         let keyLength : Int = key.length
-        let dataPointer : UnsafeMutablePointer<Int8> = unsafeBitCast(data.bytes, to: UnsafeMutablePointer<Int8>.self)
+        let dataPointer : UnsafeMutablePointer<Int8> = UnsafeMutablePointer<Int8>(mutating: data.bytes.assumingMemoryBound(to: Int8.self))
         let dataLength : Int = data.length
         
         for i in 0..<plen {
