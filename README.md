@@ -8,7 +8,7 @@ This project is a quick adaptation from the already adapted bcrypt algorithm fro
 
 ## How to use
 
-You can use it as a cocoapod adding this line to your podfile `pod 'BcryptSwift', :git => 'https://github.com/360Learning/BcryptSwift.git', :tag => '1.0.2'`.
+You can use it as a cocoapod adding this line to your podfile `pod 'BcryptSwift', :git => 'https://github.com/360Learning/BcryptSwift.git', :tag => '1.0.3'`.
 Or you can just copy the 2 files into your project. Or import it as a dynamic framework.
 
 Then use:
