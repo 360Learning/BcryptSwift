@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "BcryptSwift"
-  s.version      = "1.0.2"
+  s.version      = "1.0.3"
   s.summary      = "A standalone Bcrypt algorithm in Swift."
   s.homepage     = "https://github.com/360Learning/BcryptSwift"
   s.license      = "Apache"

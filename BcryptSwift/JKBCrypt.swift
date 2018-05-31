@@ -823,11 +823,11 @@ public class JKBCrypt: NSObject {
     }
     
     private func deinitKey() {
-        p.deinitialize()
-        p.deallocate(capacity: P_orig.count)
+        p.deinitialize(count: P_orig.count)
+        p.deallocate()
         
-        s.deinitialize()
-        s.deallocate(capacity: S_orig.count)
+        s.deinitialize(count: S_orig.count)
+        s.deallocate()
     }
     
     /**
