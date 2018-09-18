@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "BcryptSwift"
-  s.version      = "1.0.3"
+  s.version      = "1.0.4"
   s.summary      = "A standalone Bcrypt algorithm in Swift."
   s.homepage     = "https://github.com/360Learning/BcryptSwift"
   s.license      = "Apache"
@@ -17,6 +17,6 @@ Pod::Spec.new do |s|
   s.platform     = :ios, "9.0"
   s.source       = { :git => "https://github.com/360Learning/BcryptSwift.git", :tag => "#{s.version}" }
   s.source_files  = 'BcryptSwift/*.swift'
-  s.swift_version = '4.1'
+  s.swift_version = '4.2'
 
 end
